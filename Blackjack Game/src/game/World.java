@@ -2,23 +2,26 @@ package game;
 
 import playingCards.Card;
 import playingCards.Deck;
+import java.util.Scanner;
 
 public class World {
 
 	private static World gameWorld;
 	private Deck deck;
+	private static Scanner in = new Scanner(System.in);
+	private static String input = "initialized";
 	
 	public static int numOfCards = 52;
 	
 	private World()
 	{
-		System.out.println("world called");
+		System.out.println("world called"); //debug output
 		
 		deck = new Deck();
 		
 //		printDeck(deck);
 		
-		printRandomCard(deck);
+//		printRandomCard(deck);
 	}
 	
 	public static World createWorld()
@@ -34,6 +37,37 @@ public class World {
 		return gameWorld;
 	}
 	
+	public void startGame()
+	{
+		Card card;
+		int test = 1;
+		int looper = 0;
+		while(true && looper == 0)
+		{
+		card = deck.dealCard();
+		if(card != null)
+		{
+		System.out.println(test + " Card Dealt was: " + card.getCardName());
+		test++;
+		}
+		else
+			looper++;
+		}
+
+		deck.reShuffle();
+		
+		while(true && looper == 1)
+		{
+		card = deck.dealCard();
+		if(card != null)
+		{
+		System.out.println(test + " Card Dealt was: " + card.getCardName());
+		test++;
+		}
+		else
+			looper++;
+		}
+	}
 	
 	//outputs a given deck to the console
 	private void printDeck(Deck deck)
@@ -67,4 +101,5 @@ public class World {
 		
 		System.out.println("Card " + selector + " was selected: " + deck.getCardName(selector));
 	}
+
 }
